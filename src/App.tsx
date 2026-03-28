@@ -1,6 +1,8 @@
-import { useReducer } from 'react'
+import { useReducer, useState } from 'react'
 import { gameReducer, createInitialState } from './gameReducer'
 import { ThemeToggle } from './components/ThemeToggle'
+import { HomeScreen } from './components/HomeScreen'
+import { PlayerSetup } from './components/PlayerSetup'
 import './App.css'
 
 function PlaceholderScreen({ phase }: { phase: string }) {
@@ -12,12 +14,20 @@ function PlaceholderScreen({ phase }: { phase: string }) {
   )
 }
 
+type AppPhase = 'home' | 'setup' | 'game'
+
 export default function App() {
-  const [gameState] = useReducer(
+  const [appPhase, setAppPhase] = useState<AppPhase>('home')
+  const [gameState, dispatch] = useReducer(
     gameReducer,
     ['Player 1', 'Player 2', 'Player 3'],
     createInitialState
   )
+
+  function handleStartGame(playerNames: string[]) {
+    dispatch({ type: 'START_GAME', playerNames })
+    setAppPhase('game')
+  }
 
   return (
     <div className="app">
@@ -25,7 +35,15 @@ export default function App() {
         <ThemeToggle />
       </header>
       <main className="app-body">
-        <PlaceholderScreen phase={gameState.phase} />
+        {appPhase === 'home' && (
+          <HomeScreen onStart={() => setAppPhase('setup')} />
+        )}
+        {appPhase === 'setup' && (
+          <PlayerSetup onStart={handleStartGame} />
+        )}
+        {appPhase === 'game' && (
+          <PlaceholderScreen phase={gameState.phase} />
+        )}
       </main>
     </div>
   )
