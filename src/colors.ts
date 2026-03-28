@@ -24,24 +24,36 @@ function hslToHex(h: number, s: number, l: number): string {
 function getColor(col: number, row: number): string {
   const hue = Math.round((col / COLS) * 360)
 
+  // Neutral gradient rows: lightness varies across columns, no hue
+  if (row === 0) {
+    // Grey row: near-white (left) → dark grey (right)
+    const l = Math.round(88 - (col / (COLS - 1)) * 55)  // 88 → 33
+    return hslToHex(0, 0, l)
+  }
+  if (row === 1) {
+    // Black row: dark grey (left) → near-black (right)
+    const l = Math.round(25 - (col / (COLS - 1)) * 22)  // 25 → 3
+    return hslToHex(0, 0, l)
+  }
+
   // Row bands: [saturation%, lightness%]
   const bands: [number, number][] = [
-    [90, 30],  // row  0: dark vivid
-    [90, 40],  // row  1
-    [90, 50],  // row  2: vivid
-    [85, 55],  // row  3
-    [80, 60],  // row  4
-    [70, 65],  // row  5
-    [60, 70],  // row  6
-    [50, 75],  // row  7
-    [40, 80],  // row  8
-    [30, 84],  // row  9: very pastel
-    [85, 25],  // row 10: very dark vivid
-    [80, 18],  // row 11: darkest vivid
-    [0, 50],   // row 12: medium gray
-    [0, 30],   // row 13: dark gray
-    [0, 12],   // row 14: near black
-    [0, 93],   // row 15: near white
+    [0, 0],    // row  0: handled above (grey gradient reversed)
+    [0, 0],    // row  1: handled above (black gradient)
+    [65, 10],  // row  2: near-black chromatic
+    [75, 15],  // row  3: deep dark chromatic
+    [80, 18],  // row  4: darkest vivid
+    [85, 25],  // row  5: very dark vivid
+    [90, 30],  // row  6: dark vivid
+    [90, 40],  // row  7
+    [90, 50],  // row  8: vivid
+    [85, 55],  // row  9
+    [80, 60],  // row 10
+    [70, 65],  // row 11
+    [60, 70],  // row 12
+    [50, 75],  // row 13
+    [40, 80],  // row 14
+    [30, 84],  // row 15: very pastel
   ]
 
   const [s, l] = bands[row]

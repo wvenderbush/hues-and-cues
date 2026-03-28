@@ -2,8 +2,9 @@ import { buildColorGrid } from '../colors'
 import './HomeScreen.css'
 
 const PREVIEW_COLORS = buildColorGrid()
+  .slice(5, 12)        // rows 6–12: vivid to mid-saturation range
   .flatMap(row => row)
-  .filter((_, i) => i % 2 === 0)  // every other cell for a 240-cell preview
+  .filter((_, i) => i % 3 === 0)  // every 3rd cell → ~70 cells
   .slice(0, 60)
 
 type Props = { onStart: () => void }

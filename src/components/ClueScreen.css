@@ -9,6 +9,10 @@
   width: 100%;
 }
 
+.clue-screen.has-preview {
+  max-width: 900px;
+}
+
 .clue-screen h2 {
   font-size: 1.5rem;
   font-weight: 800;
@@ -119,6 +123,12 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+}
+
+.clue-markers-preview .grid-wrapper {
+  flex: none;
+  height: 220px;
+  container-type: size;
 }
 
 .clue-markers-label {

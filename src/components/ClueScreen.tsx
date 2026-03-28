@@ -41,8 +41,10 @@ export function ClueScreen({ state, dispatch }: Props) {
     }
   }
 
+  const hasPreview = !isClue1 && state.markers.length > 0 && !!state.targetColor
+
   return (
-    <div className="clue-screen">
+    <div className={`clue-screen${hasPreview ? ' has-preview' : ''}`}>
       <p className="clue-phase-label">
         {isClue1 ? 'Clue 1 of 2' : 'Clue 2 of 2'}
       </p>
@@ -60,21 +62,26 @@ export function ClueScreen({ state, dispatch }: Props) {
         </div>
       )}
 
-      {!isClue1 && state.markers.length > 0 && (
+      {!isClue1 && state.markers.length > 0 && state.targetColor && (
         <div className="clue-markers-preview">
-          <p className="clue-markers-label">Where players guessed so far:</p>
+          <p className="clue-markers-label">Where players guessed — target shown with scoring frame:</p>
           <ColorGrid
             markers={state.markers}
             players={state.players}
+            targetCol={state.targetColor.col}
+            targetRow={state.targetColor.row}
+            showFrame
             disabled
           />
         </div>
       )}
 
-      <div className="clue-restriction">
-        <strong>Restrictions:</strong> No color names (red, blue, etc.), no
-        lighter/darker, no pointing at objects in the room, no board positions.
-      </div>
+      {isClue1 && (
+        <div className="clue-restriction">
+          <strong>Restrictions:</strong> No color names (red, blue, etc.), no
+          lighter/darker, no pointing at objects in the room, no board positions.
+        </div>
+      )}
 
       <div className="clue-input-group">
         <label className="clue-input-label">
