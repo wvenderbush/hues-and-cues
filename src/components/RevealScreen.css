@@ -1,0 +1,110 @@
+.reveal-screen {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  gap: 20px;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.reveal-screen h2 {
+  font-size: 1.5rem;
+  font-weight: 800;
+  text-align: center;
+}
+
+.reveal-target-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+}
+
+.reveal-swatch {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--border);
+  flex-shrink: 0;
+}
+
+.reveal-clues {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.reveal-clue-line {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.reveal-clue-line strong {
+  color: var(--text);
+}
+
+.round-scores {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.round-scores h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+}
+
+.score-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+}
+
+.score-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.score-name {
+  flex: 1;
+  font-weight: 600;
+}
+
+.score-delta {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--accent);
+  min-width: 40px;
+  text-align: right;
+}
+
+.score-delta.clue-giver {
+  color: #ff9800;
+}
+
+.score-total {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  min-width: 60px;
+  text-align: right;
+}
+
+.reveal-actions {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 16px;
+}
