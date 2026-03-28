@@ -1,0 +1,123 @@
+.grid-wrapper {
+  width: 100%;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  border: 2px solid var(--border);
+  background: var(--surface);
+}
+
+.grid-container {
+  display: inline-grid;
+  /* 30 cols + 1 label col on left */
+  grid-template-columns: 24px repeat(30, 1fr);
+  grid-template-rows: 24px repeat(16, 1fr);
+  min-width: 640px; /* desktop minimum */
+}
+
+/* Column header row */
+.grid-col-header {
+  font-size: 9px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  user-select: none;
+}
+
+.grid-col-header.corner {
+  border-right: 1px solid var(--border);
+}
+
+/* Row label cells */
+.grid-row-label {
+  font-size: 9px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  user-select: none;
+}
+
+/* Color cells */
+.grid-cell {
+  position: relative;
+  aspect-ratio: 1;
+  cursor: pointer;
+  transition: transform 0.05s, z-index 0s;
+  min-width: 20px;
+  min-height: 20px;
+}
+
+.grid-cell:hover {
+  transform: scale(1.15);
+  z-index: 10;
+  box-shadow: 0 0 0 2px #fff, 0 0 0 3px var(--text);
+}
+
+.grid-cell.occupied {
+  cursor: default;
+}
+
+.grid-cell.occupied:hover {
+  transform: none;
+}
+
+/* Marker overlay */
+.marker {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.marker-dot {
+  width: 55%;
+  height: 55%;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.9);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.5);
+}
+
+.marker-dot.marker-2 {
+  border-style: dashed;
+  opacity: 0.85;
+}
+
+/* Target highlight (reveal phase) */
+.grid-cell.target {
+  z-index: 5;
+  box-shadow: 0 0 0 3px #fff, 0 0 0 5px #000;
+}
+
+/* Scoring frame */
+.grid-cell.in-frame {
+  box-shadow: inset 0 0 0 2px rgba(255,255,255,0.7);
+}
+
+.grid-cell.frame-edge {
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.4);
+}
+
+/* Mobile grid */
+@media (max-width: 700px) {
+  .grid-container {
+    grid-template-columns: 18px repeat(30, 1fr);
+    grid-template-rows: 18px repeat(16, 1fr);
+    min-width: 420px;
+  }
+
+  .grid-col-header,
+  .grid-row-label {
+    font-size: 7px;
+  }
+}
