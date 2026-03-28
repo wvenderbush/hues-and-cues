@@ -129,16 +129,22 @@
   }
 }
 
-/* Desktop: grid fills the flex parent height — 1fr rows divide a known height, no subpixel gaps */
+/* Desktop: wrapper fills remaining flex height, container uses container-query units
+   to get object-fit:contain behavior (square cells, no stretch, no scroll) */
 @media (min-width: 701px) {
   .grid-wrapper {
-    flex: 1;       /* grow to fill GuessScreen / RevealScreen remaining space */
-    height: 0;     /* flex-basis:0 so min-height:0 chain works */
+    flex: 1;
+    min-height: 0;
+    container-type: size;   /* enables cqw / cqh on children */
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .grid-container {
     display: grid;
-    width: 100%;
-    height: 100%;
+    /* contain: fill the wrapper without distorting aspect ratio (30 cols : 16 rows) */
+    width:  min(100cqw, calc(100cqh * 30 / 16));
+    height: min(100cqh, calc(100cqw * 16 / 30));
   }
 }
