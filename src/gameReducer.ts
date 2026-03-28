@@ -1,4 +1,4 @@
-import type { GameState, Player, Marker, Phase } from './types'
+import type { GameState, Marker } from './types'
 import { buildColorGrid, COLS, ROWS } from './colors'
 import { computeRoundScores } from './scoring'
 
