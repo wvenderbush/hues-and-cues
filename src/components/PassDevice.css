@@ -1,0 +1,57 @@
+.pass-device {
+  position: fixed;
+  inset: 0;
+  background: var(--pass-bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding: 32px;
+  text-align: center;
+  z-index: 200;
+}
+
+.pass-icon {
+  font-size: 4rem;
+  animation: bounce 1s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.pass-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--pass-accent);
+}
+
+.pass-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  max-width: 300px;
+}
+
+.pass-name {
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--text);
+}
+
+.pass-btn {
+  background: var(--pass-accent);
+  color: #fff;
+  border-radius: var(--radius);
+  padding: 16px 40px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  box-shadow: var(--shadow);
+  transition: opacity 0.15s, transform 0.1s;
+  margin-top: 8px;
+}
+
+.pass-btn:active {
+  transform: scale(0.97);
+}
