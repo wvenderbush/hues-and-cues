@@ -1,5 +1,5 @@
 import { useReducer, useState } from 'react'
-import { gameReducer, createInitialState } from './gameReducer'
+import { gameReducer, createInitialState, clockwiseOrder } from './gameReducer'
 import type { GameAction } from './gameReducer'
 import { ThemeToggle } from './components/ThemeToggle'
 import { HomeScreen } from './components/HomeScreen'
@@ -14,14 +14,6 @@ import './App.css'
 type AppPhase = 'home' | 'setup' | 'game'
 
 type PendingPass = { toName: string; context: string } | null
-
-function clockwiseGuessers(clueGiverIndex: number, playerCount: number): number[] {
-  const order: number[] = []
-  for (let i = 1; i < playerCount; i++) {
-    order.push((clueGiverIndex + i) % playerCount)
-  }
-  return order
-}
 
 export default function App() {
   const [appPhase, setAppPhase] = useState<AppPhase>('home')
@@ -42,7 +34,7 @@ export default function App() {
     switch (action.type) {
       case 'SUBMIT_CLUE1': {
         dispatch(action)
-        const order = clockwiseGuessers(gameState.currentClueGiverIndex, gameState.players.length)
+        const order = clockwiseOrder(gameState.currentClueGiverIndex, gameState.players.length)
         setPendingPass({
           toName: gameState.players[order[0]].name,
           context: 'place your first guess',
@@ -51,6 +43,7 @@ export default function App() {
       }
       case 'CONFIRM_GUESS': {
         const isLast = gameState.currentGuessOrderIndex >= gameState.guessOrder.length - 1
+        // Read pre-dispatch state intentionally: pass-target computed from current snapshot
         dispatch(action)
         if (!isLast) {
           // Pass to next guesser
@@ -71,7 +64,7 @@ export default function App() {
       }
       case 'SUBMIT_CLUE2': {
         dispatch(action)
-        const order = clockwiseGuessers(gameState.currentClueGiverIndex, gameState.players.length).reverse()
+        const order = clockwiseOrder(gameState.currentClueGiverIndex, gameState.players.length).reverse()
         setPendingPass({
           toName: gameState.players[order[0]].name,
           context: 'place your second guess',

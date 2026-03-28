@@ -26,7 +26,7 @@ function randomTargetColor() {
   return COLOR_GRID[row][col]
 }
 
-function clockwiseOrder(clueGiverIndex: number, playerCount: number): number[] {
+export function clockwiseOrder(clueGiverIndex: number, playerCount: number): number[] {
   const order: number[] = []
   for (let i = 1; i < playerCount; i++) {
     order.push((clueGiverIndex + i) % playerCount)
