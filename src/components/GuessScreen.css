@@ -84,3 +84,28 @@
 .btn-confirm:not(:disabled):active {
   transform: scale(0.97);
 }
+
+@media (max-width: 600px) {
+  .guess-screen {
+    padding: 12px;
+    gap: 12px;
+  }
+
+  .guess-header h2 {
+    font-size: 1.1rem;
+  }
+
+  .guess-actions {
+    position: sticky;
+    bottom: 0;
+    background: var(--bg);
+    padding: 12px 0;
+    border-top: 1px solid var(--border);
+    margin: 0 -12px;
+    padding: 12px;
+  }
+
+  .btn-confirm {
+    width: 100%;
+  }
+}

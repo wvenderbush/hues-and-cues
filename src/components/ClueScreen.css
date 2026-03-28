@@ -97,3 +97,19 @@
   font-size: 0.85rem;
   text-align: center;
 }
+
+@media (max-width: 600px) {
+  .clue-screen {
+    padding: 20px 16px;
+    gap: 16px;
+  }
+
+  .target-color-swatch {
+    height: 90px;
+  }
+
+  .clue-restriction {
+    font-size: 0.8rem;
+    padding: 10px 12px;
+  }
+}
