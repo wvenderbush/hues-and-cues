@@ -10,7 +10,7 @@ const MARKER_COLORS = [
 type Props = { onStart: (playerNames: string[]) => void }
 
 export function PlayerSetup({ onStart }: Props) {
-  const [names, setNames] = useState(['', '', ''])
+  const [names, setNames] = useState(['', ''])
   const [error, setError] = useState('')
 
   function updateName(index: number, value: string) {
@@ -23,13 +23,13 @@ export function PlayerSetup({ onStart }: Props) {
   }
 
   function removePlayer(index: number) {
-    if (names.length > 3) setNames(prev => prev.filter((_, i) => i !== index))
+    if (names.length > 2) setNames(prev => prev.filter((_, i) => i !== index))
   }
 
   function handleStart() {
     const filled = names.map(n => n.trim()).filter(Boolean)
-    if (filled.length < 3) {
-      setError('At least 3 players are required.')
+    if (filled.length < 2) {
+      setError('At least 2 players are required.')
       return
     }
     if (new Set(filled).size !== filled.length) {
@@ -42,7 +42,7 @@ export function PlayerSetup({ onStart }: Props) {
   return (
     <div className="setup">
       <h2>Who's playing?</h2>
-      <p className="setup-subtitle">Enter 3–10 player names to get started.</p>
+      <p className="setup-subtitle">Enter 2–10 player names to get started.</p>
 
       <div className="player-list">
         {names.map((name, i) => (
@@ -60,7 +60,7 @@ export function PlayerSetup({ onStart }: Props) {
               maxLength={20}
               onKeyDown={e => e.key === 'Enter' && handleStart()}
             />
-            {names.length > 3 && (
+            {names.length > 2 && (
               <button className="btn-remove" onClick={() => removePlayer(i)} aria-label="Remove player">
                 ✕
               </button>
