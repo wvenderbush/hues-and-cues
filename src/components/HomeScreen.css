@@ -40,21 +40,3 @@
   aspect-ratio: 1;
 }
 
-.btn-primary {
-  background: var(--button-bg);
-  color: var(--button-text);
-  border-radius: var(--radius);
-  padding: 16px 48px;
-  font-size: 1.2rem;
-  font-weight: 700;
-  box-shadow: var(--shadow);
-  transition: background 0.15s, transform 0.1s;
-}
-
-.btn-primary:active {
-  transform: scale(0.97);
-}
-
-.btn-primary:hover {
-  background: var(--accent-hover);
-}

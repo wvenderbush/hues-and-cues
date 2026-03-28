@@ -64,10 +64,11 @@ export function RevealScreen({ state, dispatch }: Props) {
           if (i === state.currentClueGiverIndex) return null
           const delta = scores.guesserPoints[i] ?? 0
           return (
-            <div key={i} className="score-row">
+            <div key={player.name} className="score-row">
               <div className="score-dot" style={{ background: player.markerColor }} />
               <span className="score-name">{player.name}</span>
               <span className="score-delta">+{delta}</span>
+              {/* player.score is pre-round; NEXT_ROUND applies the delta */}
               <span className="score-total">→ {player.score + delta} pts</span>
             </div>
           )

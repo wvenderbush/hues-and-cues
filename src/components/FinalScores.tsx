@@ -11,14 +11,24 @@ type Props = {
 
 export function FinalScores({ state, dispatch, onNewGame }: Props) {
   const sorted = [...state.players].sort((a, b) => b.score - a.score)
-  const winner = sorted[0]
+  const topScore = sorted[0].score
+  const winners = sorted.filter(p => p.score === topScore)
 
   return (
     <div className="final-scores">
       <div className="final-scores-trophy">🏆</div>
       <h2>Game over!</h2>
-      <p>Winner:</p>
-      <p className="winner-name">{winner.name}</p>
+      {winners.length > 1 ? (
+        <>
+          <p>It's a tie!</p>
+          <p className="winner-name">{winners.map(w => w.name).join(' & ')}</p>
+        </>
+      ) : (
+        <>
+          <p>Winner:</p>
+          <p className="winner-name">{sorted[0].name}</p>
+        </>
+      )}
 
       <Scoreboard players={state.players} />
 
