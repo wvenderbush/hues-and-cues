@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import type { GameState } from '../types'
 import type { GameAction } from '../gameReducer'
+import { ColorGrid } from './ColorGrid'
 import './ClueScreen.css'
 
 type Props = {
@@ -56,6 +57,17 @@ export function ClueScreen({ state, dispatch }: Props) {
           <div className="target-color-label">
             Your target color — {state.targetColor.label}
           </div>
+        </div>
+      )}
+
+      {!isClue1 && state.markers.length > 0 && (
+        <div className="clue-markers-preview">
+          <p className="clue-markers-label">Where players guessed so far:</p>
+          <ColorGrid
+            markers={state.markers}
+            players={state.players}
+            disabled
+          />
         </div>
       )}
 
